@@ -4,6 +4,7 @@ print 'Starting initialisation for uLCD...'
 # import the needed extensions for python
 import serial
 import time
+from time import sleep
 
 # open the serial connection (check with dmesg if it's not working)
 ser = serial.Serial('/dev/ttyUSB0', 9600)
@@ -23,8 +24,23 @@ time.sleep(1)
 # Byte 4 & 5: color = ffff
 # Byte 5+: "string"
 # Byte n: terminator = 0
-ser.write('s\x00\x00\x00\xff\xffHello Geek, you are using py-uLCD!\x00')
-time.sleep(1)
+ser.write('s\x00\x00\x03\xff\xffpy-uLCD\x00')
+sleep(0.08)
+
+ser.write('s\x00\x07\x00\xff\xffLicense:        GNU GPLv2\x00')
+sleep(0.08)
+ser.write('s\x00\x08\x00\xff\xffDeveloper:      nino.ninux@gmail.com\x00')
+sleep(0.08)
+ser.write('s\x00\x09\x00\xff\xffOrganisation:   LuXeria\x00')
+sleep(0.08)
+ser.write('s\x00\x0A\x00\xff\xffDevice:         4D Systems uLCD32-PT\x00')
+sleep(0.08)
+ser.write('s\x00\x0B\x00\xff\xffBaud Rate:      9600\x00')
+sleep(0.08)
+ser.write('s\x00\x0C\x00\xff\xffParity:         No\x00')
+sleep(0.08)
+
+ser.close()
 
 # write out a message that the sequence is done
 print 'Initialisation for uLCD is done.'
