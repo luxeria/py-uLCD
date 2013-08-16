@@ -6,6 +6,18 @@ import serial
 import time
 from time import sleep
 
+# Function for writing a string to the display
+def disp_string(text, col = 0, row = 0, font = 0, color = 0xffff, )
+    col = chr(col)
+    row = chr(row)
+    font = chr(font)
+    color = chr(color / 256) + chr(color % 256)
+    term = '\x00'
+    stringtosend = 's' + col + row + font + color + text + term
+    ser.write(stringtosend)
+    time.sleep(0.08)
+    return(0)
+
 # open the serial connection (check with dmesg if it's not working)
 ser = serial.Serial('/dev/ttyUSB0', 9600)
 
