@@ -1,1 +1,5 @@
-*.pdf
+# datasheets
+datasheets/*.pdf
+
+# precompiled python files
+*.pyc
