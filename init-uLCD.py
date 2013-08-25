@@ -4,7 +4,6 @@ print 'Starting initialisation for uLCD...'
 # import the needed extensions for python
 import serial
 import time
-from time import sleep
 
 # Function for writing a string to the display
 def disp_string(text, col = 0, row = 0, font = 0, color = 0xffff, )
@@ -40,17 +39,17 @@ ser.write('s\x00\x00\x03\xff\xffpy-uLCD\x00')
 sleep(0.08)
 
 ser.write('s\x00\x07\x00\xff\xffLicense:        GNU GPLv2\x00')
-sleep(0.08)
+time.sleep(0.08)
 ser.write('s\x00\x08\x00\xff\xffDeveloper:      nino.ninux@gmail.com\x00')
-sleep(0.08)
+time.sleep(0.08)
 ser.write('s\x00\x09\x00\xff\xffOrganisation:   LuXeria\x00')
-sleep(0.08)
+time.sleep(0.08)
 ser.write('s\x00\x0A\x00\xff\xffDevice:         4D Systems uLCD32-PT\x00')
-sleep(0.08)
+time.sleep(0.08)
 ser.write('s\x00\x0B\x00\xff\xffBaud Rate:      9600\x00')
-sleep(0.08)
+time.sleep(0.08)
 ser.write('s\x00\x0C\x00\xff\xffParity:         No\x00')
-sleep(0.08)
+time.sleep(0.08)
 
 ser.close()
 
