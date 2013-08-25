@@ -38,6 +38,10 @@ time.sleep(1)
 ser.write('s\x00\x00\x03\xff\xffpy-uLCD\x00')
 sleep(0.08)
 
+# Set Baud rate to 256000 Baud
+ser.write('Q\x0f')
+sleep(0.08)
+
 ser.write('s\x00\x07\x00\xff\xffLicense:        GNU GPLv2\x00')
 time.sleep(0.08)
 ser.write('s\x00\x08\x00\xff\xffDeveloper:      nino.ninux@gmail.com\x00')
