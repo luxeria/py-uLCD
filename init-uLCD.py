@@ -6,7 +6,7 @@ import serial
 import time
 
 # Function for writing a string to the display
-def disp_string(text, col = 0, row = 0, font = 0, color = 0xffff, )
+def disp_string(text, col = 0, row = 0, font = 0, color = 0xffff, ):
     col = chr(col)
     row = chr(row)
     font = chr(font)
@@ -36,11 +36,7 @@ time.sleep(1)
 # Byte 5+: "string"
 # Byte n: terminator = 0
 ser.write('s\x00\x00\x03\xff\xffpy-uLCD\x00')
-sleep(0.08)
-
-# Set Baud rate to 256000 Baud
-ser.write('Q\x0f')
-sleep(0.08)
+time.sleep(0.08)
 
 ser.write('s\x00\x07\x00\xff\xffLicense:        GNU GPLv2\x00')
 time.sleep(0.08)
