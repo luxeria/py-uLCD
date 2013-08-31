@@ -3,3 +3,6 @@ datasheets/*.pdf
 
 # precompiled python files
 *.pyc
+
+# temporary files
+*.swp
