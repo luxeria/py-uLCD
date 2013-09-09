@@ -2,26 +2,39 @@ import time
 import serial
 
 delay = 0.1
+lipsum = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. '
+
+def print_line(text):
+	# shift display up for one line
+	d.write('c\x00\x00\x00\x08\x00\x00\x00\x00\x00\xf0\x01\x3f')
+	time.sleep(3)
+	# remove remains from last line
+	d.write('r\x00\x00\x01\x38\x00\xf0\x01\xfe\x00\x00')
+	time.sleep(0.1)
+	# send line to display
+	strtosend = 's\x00\x27\x00\xff\xff' + str(text) + '\x00'
+	d.write(strtosend)
+	time.sleep(0.1)
 
 
 d = serial.Serial('/dev/ttyUSB0', 9600)
 d.write('U')
-time.sleep(1)
+time.sleep(0.1)
 d.write('E')
-time.sleep(1)
+time.sleep(0.1)
 d.write('Q\x0d')   # Set baud rate to 115200
-time.sleep(1)
+time.sleep(0.1)
 d.baudrate = 115200
-time.sleep(1)
+time.sleep(0.1)
 d.write('E')
 time.sleep(0.1)
 
-print '3'
-time.sleep(1)
-print '2'
-time.sleep(1)
-print '1'
-time.sleep(1)
+# print '3'
+# time.sleep(1)
+# print '2'
+# time.sleep(1)
+# print '1'
+# time.sleep(1)
 print 'start'
 s = time.time()
 d.write('s\x00\x00\x00\xff\xff123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\x00')
@@ -37,10 +50,17 @@ time.sleep(delay)
 d.write('s\x00\x1e\x00\xff\xff623456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\x00')
 time.sleep(delay)
 d.write('s\x00\x24\x00\xff\xff7234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890\x00')
+time.sleep(delay)
 
 # s = time.time()
 print time.time() - s - 3e-6
 
-time.sleep(1)
+print_line('Hello World')
+print_line('This is some text ')
+print_line('to test the line print function. ')
+print_line(' ')
+for i in range(0,36):
+	print_line(lipsum[40*i:40*(i+1)-1])
+	print i
 
 d.close()
